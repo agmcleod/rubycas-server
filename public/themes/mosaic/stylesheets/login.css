@@ -1,0 +1,26 @@
+.clear{clear:both;}
+body,html{height:100%;margin:0;padding:0;}
+body{background-color:#1477b8;background:url('../images/login_bg.gif') center -525px;}
+#wrapper{position:relative;width:399px;min-height:300px;margin:auto;padding-top:100px;}#wrapper h1.login_header{width:399px;height:69px;background:url('../images/mosaic_login.png') no-repeat;text-indent:-9999px;display:block;}
+#wrapper #login_box{width:288px;height:187px;background:url('../images/login_box.png') no-repeat;padding:50px 53px 60px 58px;position:relative;}
+#wrapper .footer{width:399px;height:65px;background:url('../images/box_footer.png') no-repeat;color:#fff;font-size:12px;text-align:center;padding-top:15px;}#wrapper .footer a{color:#b4c9d8;}
+a.login_btn{background:url('../images/login_btn.png') no-repeat;text-indent:-9999px;display:block;width:100%;height:40px;margin-top:30px;}a.login_btn:hover{background-position:0 -40px;}
+fieldset{margin-bottom:5px;}
+label{font-weight:bold;font-size:10px;line-height:1;padding-bottom:3px;color:#b2b2b2;}
+label.two_line{padding-top:2px;}
+.text input,select,textarea{border-collapse:collapse;border:solid 1px #b9c8e4;box-shadow:inset 1px 1px 3px #cbcbcb;-moz-box-shadow:inset 1px 1px 3px #cbcbcb;-webkit-box-shadow:inset 1px 1px 3px #cbcbcb;padding:3px 10px;-moz-border-radius:3px;-webkit-border-radius:3px;-khtml-border-radius:3px;border-radius:3px;}
+.text input{width:261px;height:30px;float:left;font-size:20px;color:#444444;}.text input.hint{color:#b2b2b2;}
+input:focus,select:focus,textarea:focus{border-color:#94aad5;}
+.text input:focus,textarea:focus{background:#fff;}
+.text input#registration_address2{margin:10px 0 0 135px;}
+select{width:200px;}
+.checkbox{margin-left:107px;}
+.checkbox input{float:left;margin-right:15px;}
+.checkbox label{text-align:left;padding-top:4px;width:445px;margin-right:0;padding-left:0;float:left;}
+.captcha label{width:100%;text-align:left;margin-bottom:5px;padding-left:0;}
+.formError{float:left;width:300px;font-size:11px;color:#b3180d;margin-left:136px;}
+.captcha .formError{margin-left:3px;width:315px;margin-top:3px;}
+.checkbox .formError{margin-left:33px;}
+.text .fieldWithErrors input,.fieldWithErrors select,.fieldWithErrors textarea{border-color:#e04338;}
+.error_messages .formError{font-size:16px;font-weight:bold;margin-left:0px;width:485px;margin-bottom:5px;}
+p.mistake{color:#ec4747;font-weight:bold;position:absolute;top:179px;left:59px;}

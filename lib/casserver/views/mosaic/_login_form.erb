@@ -1,0 +1,14 @@
+<form method="post" action="<%= @form_action || "login" %>">
+  <% if @message %>
+    <p class="<%= @message[:type] %>"><%= @message[:message] %></p>
+  <% end %>
+  <fieldset class='text'>
+    <label for="login">Login</label>
+    <input id="login" name="username" type="text" />
+  </fieldset>
+  <fieldset class='text'>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" />
+  </fieldset>
+  <a href="#" class="login_submit login_btn">Log in</a>
+</form>

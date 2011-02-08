@@ -1,0 +1,18 @@
+@font-face{font-family:'FranklinGothicFSHeavy';src:url('/fonts/FranklinGothic-Hvy-webfont.eot');src:local('☺'),url('/fonts/FranklinGothic-Hvy-webfont.woff') format('woff'),url('/fonts/FranklinGothic-Hvy-webfont.ttf') format('truetype'),url('/fonts/FranklinGothic-Hvy-webfont.svg#webfont') format('svg');font-weight:normal;font-style:normal;}body{font:11px/1.5 Helvetica,Arial,Verdana,sans-serif;color:#555555;}
+a,a:visited,a:active{outline:none;text-decoration:none;color:#555555;}
+a:hover{text-decoration:underline;}
+h1{font-family:'FranklinGothicFSHeavy';text-transform:uppercase;color:#fff;font-size:30px;font-weight:normal;letter-spacing:0.05em;text-shadow:-1px -1px 2px #333333;}
+h2{font-size:26px;line-height:1.2;color:#1069ae;font-weight:bold;}
+h3{font-size:18px;line-height:1.2;color:#1069ae;font-weight:bold;}
+h4{font-size:14px;line-height:1.2;color:#333333;}
+h5{font-size:12px;line-height:1.2;color:#94aad5;}
+h6{font-size:11px;line-height:1.2;color:#a3a0a0;}
+ol{list-style:decimal;}
+ul{list-style:disc;}
+li{margin-left:30px;}
+dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset{margin-bottom:20px;}
+p{margin-bottom:15px;}
+.smaller{font-size:80%;}
+.larger{font-size:120%;}
+.translation_missing{background:yellow;}
+sup{font-size:75%;position:relative;top:-3px;}
