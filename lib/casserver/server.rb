@@ -678,10 +678,10 @@ module CASServer
       end
     end
 
-    def render(engine, data, options = {}, locals = {}, &block)
-      super engine, data, options.merge(:views => settings.config[:custom_views]), locals, &block
+    def compile_template(engine, data, options, views)
+      super engine, data, options, settings.config[:custom_views]
     rescue Errno::ENOENT
-      super engine, data, options, locals, &block
+      super engine, data, options, views
     end
   end
 end
