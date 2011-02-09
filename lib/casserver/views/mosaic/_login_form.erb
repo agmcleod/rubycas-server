@@ -1,4 +1,6 @@
 <form method="post" action="<%= @form_action || "login" %>">
+  <input type="hidden" id="lt" name="lt" value="<%= @lt %>" />
+  <input type="hidden" id="service" name="service" value="<%= @service %>" />
   <% if @message %>
     <p class="<%= @message[:type] %>"><%= @message[:message] %></p>
   <% end %>
