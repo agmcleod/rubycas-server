@@ -16,12 +16,13 @@ input:focus,select:focus,textarea:focus{border-color:#94aad5;}
 p.mistake{color:#ec4747;font-weight:bold;position:absolute;top:179px;left:59px;}
 
 @media screen and (max-device-width:420px) {
-	#wrapper {width:299px;padding-top:50px;min-height:370px;}
-	#wrapper h1.login_header {width:299px;height:52px;background-size:100%;}
-	#wrapper #login_box {width:216px;height:112px;padding:30px 40px 80px 40px;background-size:100%;}
-	#wrapper .footer{width:299px;height:49px;background-size:100%;padding-top:11px;}
-	a.login_btn{background-size:100%;height:30px;margin-top:26px;}
-	a.login_btn:hover{background-position:0 0;}
-	.text input{width:200px;height:23px;padding:2px 6px}
-	p.mistake{top:138px;left:42px;}
+  body{background-image:none;}
+  #wrapper {width:299px;padding-top:50px;min-height:370px;}
+  #wrapper h1.login_header {width:299px;height:52px;background-size:100%;}
+  #wrapper #login_box {width:216px;height:112px;padding:30px 40px 80px 40px;background-size:100%;}
+  #wrapper .footer{width:299px;height:49px;background-size:100%;padding-top:11px;}
+  a.login_btn{background-size:100%;height:30px;margin-top:26px;}
+  a.login_btn:hover{background-position:0 0;}
+  .text input{width:200px;height:23px;padding:2px 6px}
+  p.mistake{top:138px;left:42px;}
 }
