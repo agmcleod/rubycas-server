@@ -122,6 +122,22 @@ class CASServer::Authenticators::LDAP < CASServer::Authenticators::Base
       return results.first
     end
 
+    def find_groups(groups)
+      filter = Array(groups).map { |group| Net::LDAP::Filter.eq('distinguishedName', group) }.reduce(:|)
+      return @ldap.search(:base => options[:ldap][:base], :filter => filter)
+    end
+
+    def expand_indirect_membership(groups)
+      indirect_memberof = find_groups(groups).collect { |group| group['memberof'] }.flatten - groups
+      if indirect_memberof.any?
+        $LOG.debug "#{self.class}: Indirect memberof: #{indirect_memberof.inspect}"
+        groups |= indirect_memberof
+        expand_indirect_membership(groups)
+      else
+        groups
+      end
+    end
+
     def extract_extra_attributes(ldap_entry)
       @extra_attributes = {}
       extra_attributes_to_extract.each do |attr|
@@ -134,6 +150,11 @@ class CASServer::Authenticators::LDAP < CASServer::Authenticators::Base
              end
           else
             @extra_attributes[attr] = v.to_s
+          end
+          if attr == 'memberof' && @options[:ldap][:expand_indirect_membership]
+            $LOG.debug "#{self.class}: Direct memberof: #{@extra_attributes[attr].inspect}"
+            @extra_attributes[attr] = expand_indirect_membership(@extra_attributes[attr])
+            $LOG.debug "#{self.class}: memberof: #{@extra_attributes[attr].inspect}"
           end
         end
       end
