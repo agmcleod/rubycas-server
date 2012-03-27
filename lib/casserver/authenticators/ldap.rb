@@ -127,6 +127,13 @@ class CASServer::Authenticators::LDAP < CASServer::Authenticators::Base
       return @ldap.search(:base => options[:ldap][:base], :filter => filter)
     end
 
+    def find_primary_group(id)
+      prefix = @options[:ldap][:primary_group_sid_prefix]
+      filter = Array(id).map { |t| Net::LDAP::Filter.eq('objectSid', "#{prefix}-#{t}") }.reduce(:|)
+      results = @ldap.search(:base => options[:ldap][:base], :filter => filter)
+      return results.first
+    end
+      
     def expand_indirect_membership(groups)
       indirect_memberof = find_groups(groups).collect { |group| group['memberof'].collect(&:to_s) }.flatten - groups
       if indirect_memberof.any?
@@ -152,6 +159,14 @@ class CASServer::Authenticators::LDAP < CASServer::Authenticators::Base
             $LOG.debug "#{self.class}: Direct memberof: #{@extra_attributes[attr].inspect}"
             @extra_attributes[attr] = expand_indirect_membership(@extra_attributes[attr])
             $LOG.debug "#{self.class}: memberof: #{@extra_attributes[attr].inspect}"
+            $LOG.debug "#{self.class}: primaryGroupID: #{ldap_entry['primaryGroupID']}"
+            if @options[:ldap][:primary_group_sid_prefix]
+              if primary_group = find_primary_group(ldap_entry['primaryGroupID'])
+                primary_group = primary_group['distinguishedName'].to_s
+                $LOG.debug "#{self.class}: primary group: #{primary_group}"
+                @extra_attributes[attr] |= [primary_group]
+              end
+            end
           end
         end
       end
