@@ -128,7 +128,7 @@ class CASServer::Authenticators::LDAP < CASServer::Authenticators::Base
     end
 
     def expand_indirect_membership(groups)
-      indirect_memberof = find_groups(groups).collect { |group| group['memberof'] }.flatten - groups
+      indirect_memberof = find_groups(groups).collect { |group| group['memberof'].collect(&:to_s) }.flatten - groups
       if indirect_memberof.any?
         $LOG.debug "#{self.class}: Indirect memberof: #{indirect_memberof.inspect}"
         groups |= indirect_memberof
@@ -144,10 +144,7 @@ class CASServer::Authenticators::LDAP < CASServer::Authenticators::Base
         v = !ldap_entry[attr].blank? && ldap_entry[attr].first
         if v
           if ldap_entry[attr].kind_of?(Array)
-             @extra_attributes[attr] = []
-             ldap_entry[attr].each do |a|
-               @extra_attributes[attr] << a.to_s
-             end
+            @extra_attributes[attr] = ldap_entry[attr].collect(&:to_s)
           else
             @extra_attributes[attr] = v.to_s
           end
