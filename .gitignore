@@ -18,3 +18,4 @@ resources/dev
 .bundle
 vendor/bundle
 tmp
+log
