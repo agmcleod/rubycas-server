@@ -27,6 +27,10 @@ class CASServer::Authenticators::SQLAttrEncrypted < CASServer::Authenticators::S
       end
     end
 
+    def fields
+      @fields
+    end
+
     def prefix
       @prefix
     end
@@ -67,6 +71,16 @@ class CASServer::Authenticators::SQLAttrEncrypted < CASServer::Authenticators::S
       user.password_digest == ::BCrypt::Engine.hash_secret("#{@password}", ::BCrypt::Password.new(user.password_digest).salt)
     else
       false
+    end
+  end
+
+private
+
+  def extract_extra(user)
+    @extra_attributes = {}
+    attribs = extra_attributes_to_extract
+    attribs.each do |col|
+      @extra_attributes[col] = [user.send(col)]
     end
   end
 
