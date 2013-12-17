@@ -79,8 +79,13 @@ private
   def extract_extra(user)
     @extra_attributes = {}
     attribs = extra_attributes_to_extract
+    mapfields = @options[:mapfields]
     attribs.each do |col|
-      @extra_attributes[col] = [user.send(col)]
+      if mapfields && mapfields[col]
+        @extra_attributes[col] = [user.send(mapfields[col])]
+      else
+        @extra_attributes[col] = [user.send(col)]
+      end
     end
   end
 
