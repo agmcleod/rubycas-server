@@ -22,8 +22,14 @@ class CASServer::Authenticators::SQLAttrEncrypted < CASServer::Authenticators::S
       @user_model.establish_connection(options[:database])
       @user_model.set_table_name(options[:user_table] || 'users')
       @user_model.inheritance_column = 'no_inheritance_column' if options[:ignore_type_column]
-      @fields.each do |f|
-        @user_model.send(:attr_encrypted, f.to_sym, :key => key, :prefix => @prefix)
+      if @fields.is_a? Array
+        @fields.each do |field|
+          set_encrypted_attribute(field, key)
+        end
+      elsif @fields.is_a? Hash
+        @fields.each do |field, model_field|
+          set_encrypted_attribute(model_field, key)
+        end
       end
     end
 
@@ -33,6 +39,10 @@ class CASServer::Authenticators::SQLAttrEncrypted < CASServer::Authenticators::S
 
     def prefix
       @prefix
+    end
+
+    def set_encrypted_attribute(field, key)
+      @user_model.send(:attr_encrypted, field.to_sym, :key => key, :prefix => @prefix)
     end
 
     def user_model
@@ -79,12 +89,15 @@ private
   def extract_extra(user)
     @extra_attributes = {}
     attribs = extra_attributes_to_extract
-    mapfields = @options[:mapfields]
-    attribs.each do |col|
-      if mapfields && mapfields[col]
-        @extra_attributes[col] = [user.send(mapfields[col])]
-      else
+    if self.class.fields.is_a? Array
+      attribs.each do |col|
         @extra_attributes[col] = [user.send(col)]
+      end
+    elsif self.class.fields.is_a? Hash
+      attribs.each do |col|
+        col_name = self.class.fields[col]
+        value = user.send(col_name || col)
+        @extra_attributes[col] = [value]
       end
     end
   end

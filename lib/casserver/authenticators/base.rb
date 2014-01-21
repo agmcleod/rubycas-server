@@ -47,7 +47,7 @@ module CASServer
       end
 
       def extra_attributes_to_extract
-        if @options[:extra_attributes].kind_of? Array
+        if @options[:extra_attributes].kind_of?(Array) || @options[:extra_attributes].kind_of?(Hash)
           attrs = @options[:extra_attributes]
         elsif @options[:extra_attributes].kind_of? String
           attrs = @options[:extra_attributes].split(',').collect{|col| col.strip}
